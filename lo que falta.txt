@@ -1,0 +1,6 @@
+Urls (Listo menu- layout)
+Contraseñas(Listo)
+cajas modal para confirmacion para eliminar
+Mostrar maximo 3 o 4 en el admin (Listo)
+Genero en el usuario-modificar (listo)
+Visualizar fecha_fin en concurso (listo) fecha_fin no existe en la tabla de concurso
