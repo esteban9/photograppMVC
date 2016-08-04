@@ -55,7 +55,7 @@
             <?php
             if ($categoria != "") {
                 foreach ($categoria as $cat) {
-                    echo "<input name='FK_id_categoria' type='checkbox'  value='$cat->id_categoria'>$cat->nombre</input>";
+                    echo "<input name='FK_id_categoria[]' type='checkbox'  value='$cat->id_categoria'>$cat->nombre</input>";
                     echo "<br>";
                 }
             }

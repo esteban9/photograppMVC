@@ -93,7 +93,7 @@ public function getFechaNac() {
         return $this->fk_id_tipo_usuarios;
     }
 public function save() {
-        $query = "INSERT INTO usuario (nombre, apellido,fecha_nacimiento , genero, correo, telefono, contrasenna, FK_id_nivelUsuario, FK_id_categoria)
+       echo $query = "INSERT INTO usuario (nombre, apellido,fecha_nacimiento , genero, correo, telefono, contrasenna, FK_id_nivelUsuario, FK_id_categoria)
                 VALUES('" . $this->nombre . "',
                         '" . $this->apellido . "',
                                '" . $this->fecha_nac . "',
