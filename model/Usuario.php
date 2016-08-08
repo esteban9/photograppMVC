@@ -93,7 +93,7 @@ public function getFechaNac() {
         return $this->fk_id_tipo_usuarios;
     }
 public function save() {
-       echo $query = "INSERT INTO usuario (nombre, apellido,fecha_nacimiento , genero, correo, telefono, contrasenna, FK_id_nivelUsuario, FK_id_categoria)
+       echo $query = "INSERT INTO usuario (nombre, apellido,fecha_nacimiento , genero, correo, telefono, contrasenna, FK_id_nivelUsuario)
                 VALUES('" . $this->nombre . "',
                         '" . $this->apellido . "',
                                '" . $this->fecha_nac . "',
@@ -101,14 +101,15 @@ public function save() {
                                 '" . $this->correo . "',
                                     '" . $this->telefono . "',
                                         '" . $this->contrasenna . "',
-                                              '" .$this ->FK_id_nivelUsuario . "',
-                                                            '" . $this->FK_id_categoria . "');";
+                                              '" .$this ->FK_id_nivelUsuario . "');";
+                                                    
         $save = $this->db()->query($query);
+        $newId=  $this->db()->insert_id;
         //$this->db()->error;
         if(!$save && DEBUG){
             echo "Error en la base de datos: ".$this->db()->error;
         }
-        return $save;
+        return $newId;
     }
     public function modify() {
        

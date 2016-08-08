@@ -27,5 +27,13 @@ public function save(){
     echo $query = "INSERT INTO usuariocategoria (id_usuario, id_categoria)
                 VALUES('" . $this->id_usuario . "',
                     '" . $this->id_categoria . "');";
+     $save = $this->db()->query($query);
+        
+        //$this->db()->error;
+        if(!$save && DEBUG){
+            echo "Error en la base de datos: ".$this->db()->error;
+        }
+        return $save;
+    }
 }
-}
+

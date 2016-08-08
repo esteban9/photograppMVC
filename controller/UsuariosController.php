@@ -71,19 +71,21 @@ class UsuariosController extends ControladorBase {
             $option=['cost'=>12, 'salt'=> 'This is the ADSI project salt'];
             $usuarios->setContrasenna(password_hash($contrasenna, PASSWORD_BCRYPT, $option));
             $usuarios->setFK_id_nivel($id_nivel);
-            //$usuarios->setFK_id_categoria($id_categoria);
+            $newIDUsuario = $usuarios->save();
             
-         $usuarioscategoria = new Usuariocategoria($this->adapter);
-    $count = count($id_categoria);
-    for ($i = 0; $i < $count; $i++) {
-        echo $id_categoria[$i];
-        $usuarioscategoria->setId_categoria($id_categoria);
-    }
-    
-            $save2= $usuarioscategoria->save();
-            $save = $usuarios->save();
-            //print_r($save);
-            $this->redirect("usuarios", "admin");
+            $usuarioscategoria = new Usuariocategoria($this->adapter);
+            $count = count($id_categoria);
+            if($newIDUsuario){
+            for ($i = 0; $i < $count; $i++) {
+               // echo $id_categoria[$i];
+                $usuarioscategoria->setId_categoria($id_categoria[$i]);
+                $usuarioscategoria->setId_usuario($newIDUsuario);
+                $save2= $usuarioscategoria->save();
+            }
+
+            }
+            print_r($newIDUsuario);
+           // $this->redirect("usuarios", "admin");
         }
         else {
             $nivel= new nivelUsuario($this->adapter);
