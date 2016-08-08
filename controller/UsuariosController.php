@@ -84,8 +84,8 @@ class UsuariosController extends ControladorBase {
             }
 
             }
-            print_r($newIDUsuario);
-           // $this->redirect("usuarios", "admin");
+           // print_r($newIDUsuario);
+           $this->redirect("usuarios", "admin");
         }
         else {
             $nivel= new nivelUsuario($this->adapter);
