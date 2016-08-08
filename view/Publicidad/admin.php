@@ -67,7 +67,17 @@
 
                 <?php
             }
-            ?>        
+            ?>     
+                  <?php   if(isset($_GET['error']) && $_GET['error'] != 0){
+                           switch($_GET['error']){
+                               case 1451: 
+                                   echo "No se elimino el registro";
+                                   break;
+                             
+                           }
+               }
+                          
+                      ?>
     </div>
 </div>
 

@@ -192,11 +192,22 @@ class ConcursoController extends ControladorBase {
             $id_concurso = (int) $_GET["id_concurso"];
 
             $con = new Concurso($this->adapter);
-            $con->deleteById("id_concurso",$id_concurso);
-            print_r(array());
-            //return $art;
-            //r_print(deleteById($id_articulos));
-            $this->redirect("concurso", "admin");
+         $error=   $con->deleteById("id_concurso",$id_concurso);
+           if($error==0){
+                                                                                                                        
+                 $this->redirect("concurso", "admin");
+             
+            }
+            
+                else {
+                      echo "No se pudo eliminar";
+                      $this->redirect("concurso", "admin", $error);
+                      
+                    
+                        //$this->db()->message;  
+                    //$this->view("Administrador/admin");
+                   
+            }
         }
        
         

@@ -110,11 +110,22 @@ class CategoriaController extends ControladorBase {
             $id_categoria = (int) $_GET["id_categoria"];
 
             $cat = new Categoria($this->adapter);
-            $cat->deleteById("id_categoria",$id_categoria);
-            print_r(array());
-            //return $art;
-            //r_print(deleteById($id_articulos));
-            $this->redirect("categoria", "admin");
+           $error= $cat->deleteById("id_categoria",$id_categoria);
+              if($error==0){
+                                                                                                                        
+                 $this->redirect("categoria", "admin");
+             
+            }
+            
+                else {
+                      echo "No se pudo eliminar";
+                      $this->redirect("categoria", "admin", $error);
+                      
+                    
+                        //$this->db()->message;  
+                    //$this->view("Administrador/admin");
+                   
+            }
         }
        
         

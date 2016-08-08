@@ -123,11 +123,22 @@ class NivelUsuarioController extends ControladorBase {
             $id_nivelUsuario = (int) $_GET["id_nivelUsuario"];
 
             $niv = new nivelUsuario($this->adapter);
-            $niv->deleteById("id_nivelUsuario",$id_nivelUsuario);
-            print_r(array());
-            //return $art;
-            //r_print(deleteById($id_articulos));
-            $this->redirect("nivelUsuario", "admin");
+          $error=  $niv->deleteById("id_nivelUsuario",$id_nivelUsuario);
+            if($error==0){
+                                                                                                                        
+                 $this->redirect("nivelUsuario", "admin");
+             
+            }
+            
+                else {
+                      echo "No se pudo eliminar";
+                      $this->redirect("nivelUsuario", "admin", $error);
+                      
+                    
+                        //$this->db()->message;  
+                    //$this->view("Administrador/admin");
+                   
+            }
         }
        
         

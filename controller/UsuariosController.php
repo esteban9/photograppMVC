@@ -160,11 +160,28 @@ class UsuariosController extends ControladorBase {
             $id_usuario = (int) $_GET["id_usuario"];
 
             $usu = new Usuario($this->adapter);
-            $usu->deleteById("id_usuario",$id_usuario);
-           print_r(array());
+          $error=$usu->deleteById("id_usuario",$id_usuario);
+          echo $error;
+                if($error==0){
+                                                                                                                        
+                 $this->redirect("usuarios", "admin");
+             
+            }
+            
+                else {
+                      echo "No se pudo eliminar";
+                      $this->redirect("usuarios", "admin", $error);
+                      
+                    
+                        //$this->db()->message;  
+                    //$this->view("Administrador/admin");
+                   
+            }
+            //print_r($error);
+          // print_r(array());
             //return $art;
             //r_print(deleteById($id_articulos));
-            $this->redirect("usuarios", "admin");
+            //$this->redirect("usuarios", "admin");
         }
        
         

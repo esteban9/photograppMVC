@@ -61,6 +61,17 @@
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                     </div></div></div></div>
                         </tr>
+                           <?php   if(isset($_GET['error']) && $_GET['error'] != 0){
+                        
+                           switch($_GET['error']){
+                               case 1451: 
+                                   echo "No se elimino el registro";
+                                   break;
+                             
+                           }
+               }
+                          
+                      ?>
                         <?php
                     }
                 } else {
@@ -70,6 +81,8 @@
                     <?php
                 }
                 ?>    
+                  
+
             </table>
         </div>
     </div>
