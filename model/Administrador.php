@@ -105,6 +105,7 @@ public function validarLogin() {
          echo $this->fk_id_tipo_usuario;
         $_SESSION['correo'] = $row->correo;
         $_SESSION['nombre']=$row->nombre;
+        $_SESSION['id_administrador']=$row->id_administrador;
         //Establecer tiempo de inicio de sesion
         $_SESSION["timeout"] = time();
         session_regenerate_id();

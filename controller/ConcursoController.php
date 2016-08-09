@@ -65,7 +65,7 @@ class ConcursoController extends ControladorBase {
            //$fecha_registro = isset($_POST["fecha_registro"]) ? $_POST["fecha_registro"] : "";
             $fecha_inicio = isset($_POST["fecha_inicio"]) ? $_POST["fecha_inicio"] : "";
             $fecha_fin = isset($_POST["fecha_fin"]) ? $_POST["fecha_fin"] : "";
-            $id_administrador = isset($_POST["FK_id_administrador"]) ? $_POST["FK_id_administrador"] : "";
+            $id_admin = isset($_SESSION["id_administrador"]) ? $_SESSION["id_administrador"] : "";
             $id_categoria = isset($_POST["FK_id_categoria"]) ? $_POST["FK_id_categoria"] : "";
              $id_nivel = isset($_POST["FK_id_nivel"]) ? $_POST["FK_id_nivel"] : "";
            $nombre_archivo = $_FILES["foto"]["name"];
@@ -91,12 +91,25 @@ class ConcursoController extends ControladorBase {
             $concurso->setFecha_inicio($fecha_inicio);
             $concurso->setFecha_fin($fecha_fin);
             $concurso->setPeso_limite_foto($peso_limite_foto);
-            $concurso->setFK_id_administrador($id_administrador);
+            $concurso->setFK_id_administrador($id_admin);
             $concurso->setFK_id_categoria($id_categoria);
             $concurso->setFK_id_nivelUsuario($id_nivel);
-            $save = $concurso->save();
-            //print_r($save);
-            $this->redirect("Concurso", "admin");
+            $newIDConcurso = $concurso->save();
+            
+             $concurso_nivelusuario = new Concurso_nivelusuario($this->adapter);
+            $count = count($id_nivel);
+            if($newIDConcurso){
+            for ($i = 0; $i < $count; $i++) {
+            
+                $concurso_nivelusuario->setId_nivelUsuario($id_nivel[$i]);
+                $concurso_nivelusuario->setId_concurso($newIDConcurso);
+                $save2= $concurso_nivelusuario->save();
+                }
+            }
+            
+            
+           // print_r($newIDConcurso);
+           $this->redirect("Concurso", "admin");
         }
         else{
             $administrador= new Administrador($this->adapter);
@@ -148,7 +161,7 @@ class ConcursoController extends ControladorBase {
             //$fecha_registro=isset($_POST["fecha_registro"])? $_POST["fecha_registro"]:"";
             $fecha_inicio=isset($_POST["fecha_inicio"])? $_POST["fecha_inicio"]:"";
             $fecha_fin=isset($_POST["fecha_fin"])? $_POST["fecha_fin"]:"";
-            $id_admin = isset($_POST["FK_id_administrador"]) ? $_POST["FK_id_administrador"] : "";
+            $id_admin = isset($_SESSION["id_administrador"]) ? $_SESSION["id_administrador"] : "";
             $id_categoria = isset($_POST["FK_id_categoria"]) ? $_POST["FK_id_categoria"] : "";
             $id_nivel = isset($_POST["FK_id_nivel"]) ? $_POST["FK_id_nivel"] : "";
               $nombre_archivo = $_FILES["foto"]["name"];
@@ -179,6 +192,18 @@ class ConcursoController extends ControladorBase {
             $concurso->setFK_id_categoria($id_categoria);
             $concurso->setFK_id_nivelUsuario($id_nivel);
             $modify=$concurso->modify();
+            
+            
+              $concurso_nivelusuario = new Concurso_nivelusuario($this->adapter);
+            $count = count($id_nivel);
+            if($newIDConcurso){
+            for ($i = 0; $i < $count; $i++) {
+            
+                $concurso_nivelusuario->setId_nivelUsuario($id_nivel[$i]);
+                $concurso_nivelusuario->setId_concurso($newIDConcurso);
+                $save2= $concurso_nivelusuario->save();
+                }
+            }
             
            $this->redirect("concurso", "admin");
            

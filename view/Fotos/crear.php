@@ -40,12 +40,24 @@
         <?php
         if ($allcat != "") {
             foreach ($allcat as $cat) {
-                echo "<input type='checkbox' name='FK_id_categoria' value='$cat->id_categoria'>$cat->nombre</input>";
+                echo "<input type='checkbox' name='FK_id_categoria[]' value='$cat->id_categoria'>$cat->nombre</input>";
                 echo "<br>";
             }
         }
         ?>
         <br>
+        <label>Usuario: </label><br>
+         <select name="FK_id_usuario" id="concurso" data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input ">
+            <option  value="">Seleccione un concurso</option>
+         <?php
+      
+        if ($allusu != "") {
+            foreach ($allusu as $usu) {
+                echo "<option value='$usu->id_usuario'>$usu->nombre</option>";
+            }
+        }
+        ?>
+        </select>
         <input type="submit" value="Crear" class="btn btn-primary"/><br><br>
 
     </div>

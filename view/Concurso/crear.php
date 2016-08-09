@@ -61,17 +61,15 @@
         <input type="text" name="fecha_inicio" id="fecha_inicio" class="form-control"/><br>
         <label>Fecha fin: </label>
         <input type="text" name="fecha_fin" id="fecha_fin" class="form-control"/><br>
-        <label> Administrador:</label>
-        <select name="FK_id_administrador" id="administrador" data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input">
-            <option  value="">Seleccione un administrador</option>
+       
+       
             <?php
-            if ($alladmin != "") {
-                foreach ($alladmin as $item) {
-                    echo "<option value='$item->id_administrador'>$item->nombre</option>";
-                }
-            }
-            ?>
-        </select>
+     
+                            if (isset($_SESSION['id_administrador'])) {
+                              $_SESSION['id_administrador'];
+                               
+                            }
+                            ?>
         <br>
         <label>Categoria: </label>
         <select name="FK_id_categoria" id="categoria"  data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input">
@@ -89,7 +87,7 @@
         <?php
         if ($nivel != "") {
             foreach ($nivel as $niv) {
-                echo "<input type='checkbox' name='FK_id_nivel' value='$niv->id_nivelUsuario'>$niv->nombre</input>";
+                echo "<input type='checkbox' name='FK_id_nivel[]' value='$niv->id_nivelUsuario'>$niv->nombre</input>";
                 echo "<br>";
             }
         }

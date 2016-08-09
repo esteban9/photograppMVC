@@ -71,24 +71,23 @@
 
              
                 </tr>
-                 <tr>
-                   
-        <?php
-                if ($allcat) {  
+                
+                   <tr>
+                        <?php
+                if ($allusu) {  
                    
                   ?>
                 
-                   <th>Categoria</th>
+                   <th>Usuario</th>
                    
                   
-                   <td>  <?php  echo $allcat->nombre;?></td>
+                   <td>  <?php  echo $allusu->nombre;?></td>
                <?php 
                 }
                 ?>
 
              
                 </tr>
-                   <tr>
                 
             <?php
         }

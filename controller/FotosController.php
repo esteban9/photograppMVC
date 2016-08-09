@@ -28,7 +28,9 @@ class FotosController extends ControladorBase {
          if (isset($_GET["id_foto"])) {
             $id_fotos = (int) $_GET["id_foto"];
             $FK_id_concurso= (int) $_GET["FK_id_concurso"];
-            $FK_id_categoria= (int) $_GET["FK_id_categoria"];
+         //   $FK_id_categoria= (int) $_GET["FK_id_categoria"];
+            $FK_id_usuario= (int) $_GET["FK_id_usuario"];
+            
 
             $fotos = new Fotos($this->adapter);
             $fotos = $fotos->getById($id_fotos,"id_foto");
@@ -37,13 +39,17 @@ class FotosController extends ControladorBase {
             $concurso= new Concurso($this->adapter);
             $con = $concurso->getById($FK_id_concurso,"id_concurso");
             
-            $categoria= new Categoria($this->adapter);
-            $allcat = $categoria->getById($FK_id_categoria,"id_categoria");
+            /*$categoria= new Categoria($this->adapter);
+            $allcat = $categoria->getById($FK_id_categoria,"id_categoria");*/
+            
+               $usuario= new Usuario($this->adapter);
+            $allusu = $usuario->getById($FK_id_usuario,"id_usuario");
             
             $this->view("Fotos/view", array(
                 "fotos"=>$fotos,
-                "allcat"=>$allcat,
-                "con"=>$con
+                /*"allcat"=>$allcat,*/
+                "con"=>$con,
+                "allusu"=>$allusu
                 
                    
             ));
@@ -60,6 +66,7 @@ class FotosController extends ControladorBase {
             $ruta_foto = isset($_POST["foto"]) ? $_POST["foto"] : "";
             $id_concurso = isset($_POST["FK_id_concurso"]) ? $_POST["FK_id_concurso"] : "";
             $id_categoria = isset($_POST["FK_id_categoria"]) ? $_POST["FK_id_categoria"] : "";
+            $id_usuario=isset($_POST["FK_id_usuario"]) ? $_POST["FK_id_usuario"] : "";
            $nombre_archivo = $_FILES["foto"]["name"];
             $tipo_archivo = $_FILES["foto"]["type"];
             $tamano_archivo = $_FILES["foto"]["size"];
@@ -83,19 +90,33 @@ class FotosController extends ControladorBase {
             $fotos->setEstado($estado);
             $fotos->setFoto($ruta_foto);
             $fotos->setFK_id_concurso($id_concurso);
-            $fotos->setFK_id_categoria($id_categoria);
-
-            $save = $fotos->save();
+            $fotos->setFK_id_usuario($id_usuario);
+            $newIDFoto = $fotos->save();
             
+            $fotocategoria = new Fotocategoria($this->adapter);
+            $count = count($id_categoria);
+            if($newIDFoto){
+            for ($i = 0; $i < $count; $i++) {
+               echo $id_categoria[$i];
+                $fotocategoria->setId_categoria($id_categoria[$i]);
+                $fotocategoria->setId_foto($newIDFoto);
+                $save2= $fotocategoria->save();
+                }
+            }
+            //print_r($newIDFoto);
           $this->redirect("fotos", "admin");
+            
         }else{
             $concurso= new Concurso($this->adapter);
             $allcon=$concurso->getAll("id_concurso");
             
             $categoria= new Categoria($this->adapter);
             $allcat=$categoria->getAll("id_categoria");
+            
+            $usuario=new Usuario($this->adapter);
+            $allusu=$usuario->getAll("id_usuario");
            
-        $this->view("Fotos/crear", array("allcon"=>$allcon, "allcat"=>$allcat));
+        $this->view("Fotos/crear", array("allcon"=>$allcon, "allcat"=>$allcat, "allusu"=>$allusu));
         
      }   
     }
@@ -113,10 +134,14 @@ class FotosController extends ControladorBase {
             $categoria= new Categoria($this->adapter);
             $allcat =$categoria->getAll("id_categoria"); 
             
+            $usuario=new Usuario($this->adapter);
+            $allusu=$usuario->getAll("id_usuario");
+            
             $this->view("Fotos/modificar", array(
                 "fotos" => $fotos,
                 "allcat" => $allcat,
-                "allcon" => $allcon
+                "allcon" => $allcon,
+                "allusu"=>$allusu
             ));
             
            
@@ -135,6 +160,7 @@ class FotosController extends ControladorBase {
             $ruta_foto = isset($_POST["foto"]) ? $_POST["foto"] : "";
             $id_concurso = isset($_POST["FK_id_concurso"]) ? $_POST["FK_id_concurso"] : "";
             $id_categoria = isset($_POST["FK_id_categoria"]) ? $_POST["FK_id_categoria"] : "";
+            $id_usuario = isset($_POST["FK_id_usuario"]) ? $_POST["FK_id_usuario"] : "";
             $nombre_archivo = $_FILES["foto"]["name"];
             $tipo_archivo = $_FILES["foto"]["type"];
             $tamano_archivo = $_FILES["foto"]["size"];
@@ -158,7 +184,7 @@ class FotosController extends ControladorBase {
             $fotos->setEstado($estado);
             $fotos->setFoto($ruta_foto);
             $fotos->setFK_id_concurso($id_concurso);
-            $fotos->setFK_id_categoria($id_categoria);
+            $fotos->setFK_id_usuario($id_usuario);
 
             $modify=$fotos->modify();
             //print_r($modify);

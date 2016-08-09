@@ -146,6 +146,18 @@ class UsuariosController extends ControladorBase {
             $usuarios->setFK_id_categoria($id_categoria);
             
             $modify=$usuarios->modify();
+            
+             $usuarioscategoria = new Usuariocategoria($this->adapter);
+            $count = count($id_categoria);
+            if($newIDUsuario){
+            for ($i = 0; $i < $count; $i++) {
+               // echo $id_categoria[$i];
+                $usuarioscategoria->setId_categoria($id_categoria[$i]);
+                $usuarioscategoria->setId_usuario($modify);
+                $save2= $usuarioscategoria->modify();
+            }
+
+            }
             //print_r($modify);
            $this->redirect("usuarios", "admin");
            

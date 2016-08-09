@@ -69,19 +69,18 @@
             }
         }
         ?>
-        </select>
-        <br>
-        <label>Administrador: </label> 
-        <select name="FK_id_administrador" id="administrador" data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input"/><br>
-        <option value="">Seleccione una opcion</option>>
+       
+        <!--<label>Administrador: </label>--> 
+        <input name="id_administrador" id="administrador" type="hidden"/><br>
+        <!--<option value="">Seleccione una opcion</option>>-->
         <?php
-        if ($admin != "") {
-            foreach ($admin as $adm) {
-                echo "<option value='$adm->id_administrador'>$adm->nombre</option>";
-            }
-        }
-        ?>
-        </select><br>
+     
+                            if (isset($_SESSION['id_administrador'])) {
+                              $_SESSION['id_administrador'];
+                               
+                            }
+                            ?>
+       
         <input type="submit" value="Crear" class="btn btn-primary"/><br><br>
     </div>
 </form>

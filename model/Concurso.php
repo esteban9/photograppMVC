@@ -113,7 +113,7 @@ class Concurso extends EntidadBase {
     }
 
     public function save() {
-        $query = "INSERT INTO concurso (nombre,estado,descripcion,foto,peso_limite_foto,fecha_registro,fecha_inicio, fecha_fin,FK_id_administrador, FK_id_categoria, FK_id_nivelUsuario)
+        $query = "INSERT INTO concurso (nombre,estado,descripcion,foto,peso_limite_foto,fecha_registro,fecha_inicio, fecha_fin,FK_id_administrador, FK_id_categoria)
                 VALUES('" . $this->nombre . "',
                        '" . $this->estado . "',
                        '" . $this->descripcion . "',
@@ -123,15 +123,15 @@ class Concurso extends EntidadBase {
                        '" . $this->fecha_inicio . "',
                        '" . $this->fecha_fin . "',
                        '" . $this->FK_id_administrador . "',
-                       '" . $this->FK_id_categoria . "',
-                       '" . $this->FK_id_nivelUsuario . "');";
+                       '" . $this->FK_id_categoria . "');";
         $save = $this->db()->query($query);
+        $newID = $this->db()->insert_id;
 
 
         if (!$save && DEBUG) {
             echo "Error en la base de datos: " . $this->db()->error;
         }
-        return $save;
+        return $newID;
     }
 
     public function modify() {

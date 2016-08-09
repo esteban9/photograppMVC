@@ -35,5 +35,16 @@ public function save(){
         }
         return $save;
     }
+    public function modify() {
+      
+        $query="UPDATE usuariocategoria SET id_usuario='$this->id_usuario', id_categoria='$this->id_categoria"
+                . "WHERE id_usuario='$this->id_usuario'";
+        $modify= $this->db()->query($query);
+        if(!$modify && DEBUG){
+            echo "Error en la base de datos: ".$this->db()->error;
+        }
+        return $modify;
+       
+    }
 }
 

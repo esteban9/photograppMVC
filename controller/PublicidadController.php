@@ -61,7 +61,7 @@ class PublicidadController extends ControladorBase {
             $fecha_inicio  = isset($_POST["fecha_inicio"]) ? $_POST["fecha_inicio"] : "";
             $fecha_fin = isset($_POST["fecha_fin"]) ? $_POST["fecha_fin"] : "";
             $FK_id_usuario = isset($_POST["FK_id_usuario"]) ? $_POST["FK_id_usuario"] : "";
-            $FK_id_administrador = isset($_POST["FK_id_administrador"]) ? $_POST["FK_id_administrador"] : "";
+            $FK_id_administrador = isset($_SESSION['id_administrador']) ? $_SESSION['id_administrador'] : "";
             $nombre_archivo = $_FILES["foto"]["name"];
             $tipo_archivo = $_FILES["foto"]["type"];
             $tamano_archivo = $_FILES["foto"]["size"];
@@ -78,6 +78,7 @@ class PublicidadController extends ControladorBase {
                     echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
                 }
             }
+            echo $_SESSION['id_administrador'];
             $publicidad = new Publicidad($this->adapter);
             
             $publicidad->setEstado($estado);
@@ -90,8 +91,8 @@ class PublicidadController extends ControladorBase {
             $publicidad->setFK_id_usuario($FK_id_usuario);
             $publicidad->setFK_id_administrador($FK_id_administrador);
             $save = $publicidad->save();
-            //print_r($save);
-            $this->redirect("publicidad", "admin");
+           print_r($save);
+           // $this->redirect("publicidad", "admin");
     }else {
         $usuario = new Usuario($this->adapter);
         $usuarios = $usuario->getAll("id_usuario");

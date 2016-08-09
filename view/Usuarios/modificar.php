@@ -59,7 +59,7 @@
 
                 foreach ($categoria as $cat) {
 
-                    echo "<input name='FK_id_categoria' type='checkbox' selected='selected' value=<?php$cat->id_categoria>$cat->nombre</input>";
+                    echo "<input name='FK_id_categoria[]' type='checkbox' selected='checked' value=<?php$cat->id_categoria>$cat->nombre</input>";
                     echo "<br>";
                 }
             }

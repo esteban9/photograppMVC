@@ -9,6 +9,7 @@
             <script type="text/javascript">
                 $(document).ready(function () {
                     $('#concurso > option[value="<?php echo $fotos->FK_id_concurso; ?>"]').attr('selected', 'selected');
+                    $('#usuario > option[value="<?php echo $fotos->FK_id_usuario; ?>"]').attr('selected', 'selected');
                 });
             </script>
             <a href="" class="list-group-item active">Acciones</a>
@@ -62,6 +63,18 @@
         }
         ?>
         <br>
+         <label> Concurso:</label>
+            <select name="FK_id_usuario" id="usuario" data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input ">
+                <option  value="">Seleccione un concurso</option>
+                <?php
+                if ($allusu != "") {
+                    foreach ($allusu as $usu) {
+                        echo "<option value='$usu->id_usuario'>$usu->nombre</option>";
+                    }
+                }
+                ?>
+            </select>
+            <br>
             <input type="submit"  value="Actualizar" class="btn btn-primary"/><br><br>
         <?php }
         ?>

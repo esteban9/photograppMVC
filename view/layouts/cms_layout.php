@@ -121,6 +121,7 @@ if(isset($_SESSION['fk_id_tipo_usuario']) && $_SESSION['fk_id_tipo_usuario'] == 
                             <?php
                             if (isset($_SESSION['nombre'])) {
                                 echo "(". $_SESSION['nombre']. ")";
+                              $_SESSION['id_administrador'];
                                
                             }
                             ?>

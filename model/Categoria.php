@@ -52,19 +52,15 @@ class Categoria extends EntidadBase {
                         '" . $this->descripcion . "',
                         '" .$this ->foto. "');";
         $save = $this->db()->query($query);
-        //$this->db()->error;
+        $newId=  $this->db()->insert_id;
         if(!$save && DEBUG){
             echo "Error en la base de datos: ".$this->db()->error;
         }
-        return $save;
+        return $newId;
     }
 
      public function modify() {
-       /* $nombreChange = isset($this->nombre)?"nombre = '".$this->nombre."'," : "";
-        $descripcionChange = isset($this->descripcion)?"descripcion = '".$this->descripcion."'" : "";
-        $idChange = isset($this->descripcion)?"id_articulos = '".$this->id_articulos."'" : "";
-        $query="UPDATE articulos SET $nombreChange $descripcionChange"
-                . "WHERE $idChange;";*/
+      
         $query="UPDATE categoria SET nombre='$this->nombre', descripcion='$this->descripcion', foto='$this->foto' "
                 . "WHERE id_categoria='$this->id_categoria'";
         $modify= $this->db()->query($query);

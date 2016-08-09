@@ -14,7 +14,7 @@
         <label >Nombre del Artículo</label>
         <input type="text" name="nombre" data-validation-placeholder="Campo obligatorio" class="form-control validate[required, custom[onlyLetterSp]] text-input"/><br>
         <label>Descripción</label> 
-        <input type="textarea" name="descripcion" class="form-control"/><br>
+        <input type="textarea" name="descripcion" class="form-control" rows="200" cols="500"/><br>
         <label> Administrador:</label>
 
         <select name="FK_id_administrador" id="administrador" data-validation-placeholder="Campo obligatorio" class="form-control validate[required] text-input"/><br>

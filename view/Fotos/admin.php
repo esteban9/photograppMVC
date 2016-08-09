@@ -31,7 +31,7 @@
                         <td><?php echo $fotos->nombre; ?></td>
                        
                         <td><?php echo $fotos->foto; ?></td>
-                        <td><a href="<?php echo $helper->url("fotos", "visualizar"); ?>&id_foto=<?php echo $fotos->id_foto; ?>&FK_id_concurso=<?php echo $fotos->FK_id_concurso;?>&FK_id_categoria=<?php echo $fotos->FK_id_categoria;?>" class="btn btn-primary"><input type=image src="images/lupa.png" width="15px" height="15px"></a>
+                        <td><a href="<?php echo $helper->url("fotos", "visualizar"); ?>&id_foto=<?php echo $fotos->id_foto; ?>&FK_id_concurso=<?php echo $fotos->FK_id_concurso;?>&FK_id_usuario=<?php echo $fotos->FK_id_usuario;?>" class="btn btn-primary"><input type=image src="images/lupa.png" width="15px" height="15px"></a>
                             <a href="<?php echo $helper->url("fotos", "modificarFotos"); ?>&id_foto=<?php echo $fotos->id_foto; ?>" class="btn btn-primary"><input type=image src="images/lapiz.png" width="15px" height="15px"</a>
                     
                             <a href="#" id="iditem-<?php echo $fotos->id_foto; ?>" class="btn btn-primary btnEliminarItem" data-toggle="modal" data-target="#myModal">
