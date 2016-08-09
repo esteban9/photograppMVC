@@ -44,12 +44,15 @@ class AdministradorController extends ControladorBase {
             $nombre = isset($_POST["nombre"]) ? $_POST["nombre"] : "";
             $contra = isset($_POST["contrasenna"]) ? $_POST["contrasenna"] : "";
             $correo = isset($_POST["correo"]) ? $_POST["correo"] : "";
+            $id_tipo_usuario=1;
+        
             //Creamos un usuario
             $administrador = new Administrador($this->adapter);
             $administrador->setNombre($nombre);
  $option=['cost'=>12, 'salt'=> 'This is the ADSI project salt'];
             $administrador->setcontrasenna(password_hash($contra, PASSWORD_BCRYPT, $option));
             $administrador->setCorreo($correo);
+            $administrador->setFk_id_tipo($id_tipo_usuario);
             $save = $administrador->save();
             $this->redirect("administrador", "admin");
         }

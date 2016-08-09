@@ -51,10 +51,10 @@ class Administrador extends EntidadBase {
         $this->correo = $correo;
     }
         public function save() {
-        $query = "INSERT INTO administrador (nombre,contrasenna, correo)
+        $query = "INSERT INTO administrador (nombre,contrasenna, correo, FK_id_tipo_usuario)
                 VALUES( '" . $this->nombre . "',
                         '" . $this->contrasenna . "',
-                        '" .$this ->correo. "');";
+                        '" .$this ->correo. "', '" .$this->fk_id_tipo_usuario. "');";
         $save = $this->db()->query($query);
         //$this->db()->error;
         if(!$save && DEBUG){

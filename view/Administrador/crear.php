@@ -19,6 +19,7 @@
                         <input type="password" name="Confcontrasenna" class="form-control validate[required, minSize[8], equals[contrasenna]] text-input"/><br>
                         <label>Correo: </label>
                         <input type="text" name="correo" data-validation-placeholder="Campo obligatorio" class="form-control validate[required, custom[email]] text-input "/><br>
+                        <input type="hidden" name="id_tipo_usuario" value="1" data-validation-placeholder="Campo obligatorio" class="form-control validate[required, custom[email]] text-input "/><br>
                         <input type="submit" value="Crear" class="btn btn-primary"/><br><br>
             </form>
         </div>
