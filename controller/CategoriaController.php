@@ -130,4 +130,72 @@ class CategoriaController extends ControladorBase {
        
         
     }
+       public function categoriapdf() {
+                           
+        require_once 'dompdf/dompdf_config.inc.php';
+        $cat = new Categoria($this->adapter);
+        $allCat = $cat->getAll();
+    
+
+        $codigoHTML ='
+<!DOCTYPE html>
+<header>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reporte pdf</title>
+
+<center><img src="Photograpp2.png" width="450" height="80" /></center>
+<br>
+<br>
+
+</header>
+<body>
+
+<p><center>Todos los registros de la tabla Categoria</center></p>
+<br>
+<br>
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="6" bgcolor="skyblue"><CENTER><strong>REPORTE DE LA TABLA ADMINISTRADOR</strong></CENTER></td>
+  </tr>
+  <tr bgcolor="blue">
+    <td><strong>ID CATEGORIA</strong></td>
+    <td><strong>NOMBRE</strong></td>
+    <td><strong>DESCRIPCIÓN</strong></td>
+    <td><strong>FOTO</strong></td>
+    
+  </tr>
+
+
+  <footer class="col-lg-12">
+            <hr>
+            Photograpp - Copyright © 2016        </footer>';
+
+
+    foreach ($allCat as $cat) { 
+
+
+     $codigoHTML.='
+                        <tr>
+                            <td>'.$cat->id_categoria.'</td>
+                            <td>'.$cat->nombre.'</td>
+                            <td>'.$cat->descripcion.'</td>
+                            <td>'.$cat->foto.'</td>
+                           
+            </tr>';
+	
+}
+$codigoHTML.='
+</table>
+</body>
+</html>';
+
+$codigoHTML=utf8_encode($codigoHTML);
+$dompdf=new DOMPDF();
+$dompdf->load_html($codigoHTML);
+ini_set("memory_limit","128M");
+$dompdf->render();
+$dompdf->stream("categoriapdf.pdf");
+
+            }
     }

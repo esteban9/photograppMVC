@@ -61,6 +61,7 @@
                 <?php
             }
             ?> 
+                 <a href="<?php echo $helper->url("articulos", "articulospdf"); ?>" class="btn btn-primary"><input type=image src="pdf.png" width="15" height="15"</a>
     </div>
 </div>
 

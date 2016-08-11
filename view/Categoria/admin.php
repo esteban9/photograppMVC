@@ -60,7 +60,8 @@
 
                 <?php
             }
-            ?>   
+            ?> 
+                 <a href="<?php echo $helper->url("categoria", "categoriapdf"); ?>" class="btn btn-primary"><input type=image src="pdf.png" width="15" height="15"</a>
                    <?php   if(isset($_GET['error']) && $_GET['error'] != 0){
                            switch($_GET['error']){
                                case 1451: 

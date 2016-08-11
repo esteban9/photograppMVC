@@ -115,4 +115,72 @@ class ArticulosController extends ControladorBase {
        
         
     }
+    public function articulospdf() {
+                           
+        require_once 'dompdf/dompdf_config.inc.php';
+        $art = new Articulos($this->adapter);
+        $allArt = $art->getAll();
+    
+
+        $codigoHTML ='
+<!DOCTYPE html>
+<header>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reporte pdf</title>
+
+<center><img src="Photograpp2.png" width="450" height="80" /></center>
+<br>
+<br>
+
+</header>
+<body>
+
+<p><center>Todos los registros de la tabla Articulos</center></p>
+<br>
+<br>
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="6" bgcolor="skyblue"><CENTER><strong>REPORTE DE LA TABLA ADMINISTRADOR</strong></CENTER></td>
+  </tr>
+  <tr bgcolor="blue">
+    <td><strong>ID ARTICULOS</strong></td>
+    <td><strong>NOMBRE</strong></td>
+    <td><strong>DESCRIPCIÓN</strong></td>
+    <td><strong>FK ID ADMINISTRADOR</strong></td>
+    
+  </tr>
+
+
+  <footer class="col-lg-12">
+            <hr>
+            Photograpp - Copyright © 2016        </footer>';
+
+
+    foreach ($allArt as $art) { 
+
+
+     $codigoHTML.='
+                        <tr>
+                            <td>'.$art->id_articulos.'</td>
+                            <td>'.$art->nombre.'</td>
+                            <td>'.$art->descripcion.'</td>
+                            <td>'.$art->FK_id_administrador.'</td>
+                           
+            </tr>';
+	
+}
+$codigoHTML.='
+</table>
+</body>
+</html>';
+
+$codigoHTML=utf8_encode($codigoHTML);
+$dompdf=new DOMPDF();
+$dompdf->load_html($codigoHTML);
+ini_set("memory_limit","128M");
+$dompdf->render();
+$dompdf->stream("articulospdf.pdf");
+
+            }
     }

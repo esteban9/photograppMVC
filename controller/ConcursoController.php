@@ -237,5 +237,89 @@ class ConcursoController extends ControladorBase {
        
         
     }
+    public function concursopdf() {
+                           
+        require_once 'dompdf/dompdf_config.inc.php';
+        $con = new Concurso($this->adapter);
+        $allCon = $con->getAll();
+    
+
+        $codigoHTML ='
+<!DOCTYPE html>
+<header>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reporte pdf</title>
+
+<center><img src="Photograpp2.png" width="450" height="80" /></center>
+<br>
+<br>
+
+</header>
+<body>
+
+<p><center>Todos los registros de la tabla Categoria</center></p>
+<br>
+<br>
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="6" bgcolor="skyblue"><CENTER><strong>REPORTE DE LA TABLA ADMINISTRADOR</strong></CENTER></td>
+  </tr>
+  <tr bgcolor="blue">
+    <td><strong>ID CONCURSO</strong></td>
+    <td><strong>NOMBRE</strong></td>
+    <td><strong>ESTADO</strong></td>
+    <td><strong>DESCRIPCION</strong></td>
+    <td><strong>FOTO</strong></td>
+    <td><strong>PESO LIMITE</strong></td>
+    <td><strong>FECHA REGISTRO</strong></td>
+    <td><strong>FECHA INICIO</strong></td>
+    <td><strong>FECHA FIN</strong></td>
+    <td><strong>FK ID ADMINISTARDOR</strong></td>
+    <td><strong>FK ID CATEGORIA</strong></td>
+    <td><strong>FK ID NIVEL USUARIO</strong></td>
+    
+  </tr>
+
+
+  <footer class="col-lg-12">
+            <hr>
+            Photograpp - Copyright © 2016        </footer>';
+
+
+    foreach ($allCon as $con) { 
+
+
+     $codigoHTML.='
+                        <tr>
+                            <td>'.$con->id_concurso.'</td>
+                            <td>'.$con->nombre.'</td>
+                            <td>'.$con->estado.'</td>
+                            <td>'.$con->descripcion.'</td>
+                            <td>'.$con->foto.'</td>
+                            <td>'.$con->peso_limite_foto.'</td>
+                            <td>'.$con->fecha_registro.'</td>
+                            <td>'.$con->fecha_inicio.'</td>
+                            <td>'.$con->fecha_fin.'</td>
+                            <td>'.$con->FK_id_administrador.'</td>
+                            <td>'.$con->FK_id_categoria.'</td>
+                            <td>'.$con->FK_is_nivelUsuario.'</td>
+                           
+            </tr>';
+	
+}
+$codigoHTML.='
+</table>
+</body>
+</html>';
+
+$codigoHTML=utf8_encode($codigoHTML);
+$dompdf=new DOMPDF();
+$dompdf->load_html($codigoHTML);
+ini_set("memory_limit","128M");
+$dompdf->render();
+$dompdf->stream("concursopdf.pdf");
+
+            }
     }
 

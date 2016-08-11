@@ -126,7 +126,7 @@ class AdministradorController extends ControladorBase {
        
         
     }
-     public function administradorpdf(){
+ public function administradorpdf() {
                            
         require_once 'dompdf/dompdf_config.inc.php';
         $admins = new Administrador($this->adapter);
@@ -173,11 +173,11 @@ class AdministradorController extends ControladorBase {
 
      $codigoHTML.='
                         <tr>
-                            <td>'. $admins->id_administrador. '<td>
-                            <td>'. $admins->nombre.'<td>
-                            <td>'. $admins->contrasenna.'<td>
-                            <td>'. $admins->correo.'<td>
-                            <td>'. $admins->fk_id_tipo_usuario.'<td>
+                            <td>'.$admins->id_administrador.'</td>
+                            <td>'.$admins->nombre.'</td>
+                            <td>'.$admins->contrasenna.'</td>
+                            <td>'.$admins->correo.'</td>
+                            <td>'.$admins->fk_id_tipo_usuario.'</td>
             </tr>';
 	
 }
@@ -192,10 +192,11 @@ $dompdf->load_html($codigoHTML);
 ini_set("memory_limit","128M");
 $dompdf->render();
 $dompdf->stream("administradorpdf.pdf");
+
             }
 }
 
-        ?>
+       
         
       
 
