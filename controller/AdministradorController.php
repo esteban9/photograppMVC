@@ -126,5 +126,78 @@ class AdministradorController extends ControladorBase {
        
         
     }
-    }
+     public function administradorpdf(){
+                           
+        require_once 'dompdf/dompdf_config.inc.php';
+        $admins = new Administrador($this->adapter);
+        $allAdmin = $admins->getAll();
+    
+
+        $codigoHTML ='
+<!DOCTYPE html>
+<header>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reporte pdf</title>
+
+<center><img src="Photograpp2.png" width="450" height="80" /></center>
+<br>
+<br>
+
+</header>
+<body>
+
+<p><center>Todos los registros de la tabla Adminisrador</center></p>
+<br>
+<br>
+
+<table width="100%" border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="6" bgcolor="skyblue"><CENTER><strong>REPORTE DE LA TABLA ADMINISTRADOR</strong></CENTER></td>
+  </tr>
+  <tr bgcolor="blue">
+    <td><strong>ID ADMINISTRADOR</strong></td>
+    <td><strong>NOMBRE</strong></td>
+    <td><strong>CONTRASENNA</strong></td>
+    <td><strong>CORREO</strong></td>
+    <td><strong>FK_ID_TIPO_USUARIO</strong></td>
+  </tr>
+
+
+  <footer class="col-lg-12">
+            <hr>
+            Photograpp - Copyright © 2016        </footer>';
+
+
+    foreach ($allAdmin as $admins) { 
+
+
+     $codigoHTML.='
+                        <tr>
+                            <td>'. $admins->id_administrador. '<td>
+                            <td>'. $admins->nombre.'<td>
+                            <td>'. $admins->contrasenna.'<td>
+                            <td>'. $admins->correo.'<td>
+                            <td>'. $admins->fk_id_tipo_usuario.'<td>
+            </tr>';
+	
+}
+$codigoHTML.='
+</table>
+</body>
+</html>';
+
+$codigoHTML=utf8_encode($codigoHTML);
+$dompdf=new DOMPDF();
+$dompdf->load_html($codigoHTML);
+ini_set("memory_limit","128M");
+$dompdf->render();
+$dompdf->stream("administradorpdf.pdf");
+            }
+}
+
+        ?>
+        
+      
+
+    
 

@@ -32,6 +32,9 @@
                     <td><?php echo $admin->correo; ?></td>
                     <td><a href="<?php echo $helper->url("administrador", "visualizar"); ?>&id_administrador=<?php echo $admin->id_administrador; ?>" class="btn btn-primary"><input type=image src="images/lupa.png" width="15px" height="15px"></a>
                         <a href="<?php echo $helper->url("administrador", "modificarAdministrador"); ?>&id_administrador=<?php echo $admin->id_administrador; ?>" class="btn btn-primary"><input type=image src="images/lapiz.png" width="15px" height="15px"</a>
+                     
+                                                <a href="<?php echo $helper->url("administrador", "administradorpdf"); ?>&id_administrador=<?php echo $admin->id_administrador; ?>" class="btn btn-primary">
+                                                <input type=image src="pdf.png" width="15" height="15">
                         <a href="#" id="iditem-<?php echo $admin->id_administrador; ?>" class="btn btn-primary btnEliminarItem" data-toggle="modal" data-target="#myModal">
                             <input type=image src="images/x.png" width="15px" height="15px"
                         </a>
